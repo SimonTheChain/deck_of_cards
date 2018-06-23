@@ -2,8 +2,11 @@
 A module to create a deck of cards object with which you can interact.
 
 ### Example usage
+**import the module**
+`from deck_of_cards import deck_of_cards`
+
 **create an instance of DeckOfCards**
-`deck_obj = DeckOfCards()`
+`deck = deck_of_cards.DeckOfCards()`
 
 **add jokers**
 `deck_obj.add_jokers()`
