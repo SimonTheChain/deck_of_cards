@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="deck_of_cards",
-    version="0.0.2",
+    version="0.0.3",
     author="Simon Lachaîne",
     author_email="simonthechain@gmail.com",
     description="A module to create and interact with a deck of cards object",
