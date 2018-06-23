@@ -9,7 +9,7 @@
 #
 # Install pytest-cov: pip install pytest-cov
 #
-# Run tests: py.test --cov=deck_of_cards
+# Run tests: py.test --cov=deck_of_cards.deck_of_cards
 #
 # Docs: http://pytest-cov.readthedocs.io/en/latest/index.html
 

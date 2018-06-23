@@ -47,17 +47,17 @@ print(len(deck_obj.deck))
 ```
 ============================= test session starts =============================
 platform win32 -- Python 3.5.3, pytest-3.6.2, py-1.5.3, pluggy-0.6.0
-rootdir: C:\Users\Smoky05\PycharmProjects\DeckOfCards, inifile:
+rootdir: C:\Users\Smoky05\PycharmProjects\deck_of_cards, inifile:
 plugins: cov-2.5.1
 collected 14 items
 
-test_deck_of_cards.py ..............                                     [100%]
+deck_of_cards\test_deck_of_cards.py ..............                       [100%]
 
 ----------- coverage: platform win32, python 3.5.3-final-0 -----------
-Name               Stmts   Miss  Cover
---------------------------------------
-deck_of_cards.py     135     27    80%
+Name                             Stmts   Miss  Cover
+----------------------------------------------------
+deck_of_cards\deck_of_cards.py     135     27    80%
 
 
-========================== 14 passed in 0.13 seconds ==========================
+========================== 14 passed in 0.12 seconds ==========================
 ```
