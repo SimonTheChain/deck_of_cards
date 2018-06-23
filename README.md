@@ -1,4 +1,4 @@
-# DeckOfCards
+# deck_of_cards
 A module to create a deck of cards object with which you can interact.
 
 ### Example usage
