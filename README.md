@@ -6,7 +6,7 @@ A module to create a deck of cards object with which you can interact.
 `from deck_of_cards import deck_of_cards`
 
 **create an instance of DeckOfCards**
-`deck = deck_of_cards.DeckOfCards()`
+`deck_obj = deck_of_cards.DeckOfCards()`
 
 **add jokers**
 `deck_obj.add_jokers()`
