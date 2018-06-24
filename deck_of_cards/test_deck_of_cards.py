@@ -30,22 +30,6 @@ class TestCard:
         assert isinstance(card_obj, Card)
         assert isinstance(card_obj, object)
 
-    def test_adjust_values_output(self):
-        """
-        Asserts that _adjust_value returns an integer
-        """
-        card = Card((0, 0))
-        assert isinstance(card._adjust_value(card.rank), int)
-
-    def test_adjust_values_error(self):
-        """
-        Asserts that _adjust_value raises an error
-        """
-        card = Card((0, 0))
-
-        with pytest.raises(TypeError):
-            card._adjust_value("This is not an integer")
-
     def test_assign_names_output(self):
         """
         Asserts that _assign_names returns a string

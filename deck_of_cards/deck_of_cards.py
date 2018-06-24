@@ -27,7 +27,7 @@ class Card(object):
         """
         self.suit = suit_rank_tup[0]
         self.rank = suit_rank_tup[1]
-        self.value = self._adjust_value(self.rank)
+        self.value = self.rank
         self.name = self._translate_card()
 
         logging.debug("_Card initialized_")
@@ -57,24 +57,6 @@ class Card(object):
         return self.value > other.value
 
     @staticmethod
-    def _adjust_value(rank):
-        """
-        Adjusts the value of the King for default values
-        :param rank: rank of the card
-        :return: value of the card
-        """
-        if isinstance(rank, int):
-            if rank == 0:
-                return 13
-
-            else:
-                return rank
-
-        else:
-            logging.info("An invalid parameter was passed to '_adjust_value'")
-            raise TypeError("The argument of the method must be an integer")
-
-    @staticmethod
     def _assign_names(rank):
         """
         Assigns card names according to rank
@@ -82,22 +64,23 @@ class Card(object):
         :return: string of the card's name
         """
         if isinstance(rank, int):
-            if rank == 0:
-                return "King"
 
-            elif rank == 12:
-                return "Queen"
+            if rank == 1:
+                return "Ace"
 
             elif rank == 11:
                 return "Jack"
 
-            elif rank == 1:
-                return "Ace"
+            elif rank == 12:
+                return "Queen"
 
             elif rank == 13:
-                return "Black and white"
+                return "King"
 
             elif rank == 14:
+                return "Black and white"
+
+            elif rank == 15:
                 return "Color"
 
             else:
@@ -146,11 +129,11 @@ class DeckOfCards(object):
     SUITS_RANKS = [
         (
             i % 4,  # suit
-            i % 13  # rank
+            13 if i % 13 == 0 else i % 13  # rank
         )
         for i in range(1, 53)
     ]
-    
+
     def __init__(self):
         """
         Initializes the deck object with a single deck of cards
@@ -301,8 +284,8 @@ class DeckOfCards(object):
         Adds jokers to the deck
         :return: deck objects
         """
-        joker_bw = Card((4, 13))
-        joker_color = Card((4, 14))
+        joker_bw = Card((4, 14))
+        joker_color = Card((4, 15))
         self.deck.append(joker_bw)
         self.deck.append(joker_color)
         return self.deck
@@ -325,7 +308,9 @@ def main():
     deck_obj.print_deck()
 
     # give out a random card
-    deck_obj.give_random_card()
+    print("\nTaking a random card")
+    card = deck_obj.give_random_card()
+    print(card.name)
 
     # shuffle the deck
     deck_obj.shuffle_deck()
@@ -338,7 +323,7 @@ def main():
     print(len(deck_obj.deck))
 
     # insert a new card into the deck
-    card = Card((0, 0))
+    card = Card((2, 4))
     deck_obj.take_card(card)
     print(len(deck_obj.deck))
 
