@@ -66,8 +66,8 @@ deck_of_cards\test_deck_of_cards.py ............                         [100%]
 ----------- coverage: platform win32, python 3.5.3-final-0 -----------
 Name                             Stmts   Miss  Cover
 ----------------------------------------------------
-deck_of_cards\deck_of_cards.py     130     29    78%
+deck_of_cards\deck_of_cards.py     131     29    78%
 
 
-========================== 12 passed in 0.18 seconds ==========================
+========================== 12 passed in 0.15 seconds ==========================
 ```
