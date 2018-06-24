@@ -1,6 +1,9 @@
 # deck_of_cards
 A module to create a deck of cards object with which you can interact.
 
+### Documentation
+https://deck-of-cards.readthedocs.io/en/latest/
+
 ### Example usage
 **import the module**
 `from deck_of_cards import deck_of_cards`
