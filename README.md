@@ -23,10 +23,11 @@ deck_obj.print_deck()
 
 **card objects have the following attributes**
 ```
-self.suit  # 0=spades, 1=hearts, 2=diamonds, 3=clubs, 4=joker
-self.rank  # 1=Ace, 11=Jack, 12=Queen, 13=King, 14=B&W Joker, 15=Color Joker
-self.value # defaults: same as rank
-self.name  # string representation
+card.suit  # 0=spades, 1=hearts, 2=diamonds, 3=clubs, 4=joker
+card.rank  # 1=Ace, 11=Jack, 12=Queen, 13=King, 14=B&W Joker, 15=Color Joker
+card.value # defaults: same as rank
+card.name  # string representation
+card.image_path = ""  # path to an image file corresponding to the card
 ```
 
 **insert a new card into the deck**

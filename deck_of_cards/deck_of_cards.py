@@ -29,6 +29,7 @@ class Card(object):
         self.rank = suit_rank_tup[1]
         self.value = self.rank
         self.name = self._translate_card()
+        self.image_path = ""
 
         logging.debug("_Card initialized_")
 
