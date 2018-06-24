@@ -32,7 +32,7 @@ self.name  # string representation
 **insert a new card into the deck**
 ```
 print(len(deck_obj.deck))
-card = Card((2, 11))
+card = deck_of_cards.Card((2, 11))
 print(card.name)
 deck_obj.take_card(card)
 print(len(deck_obj.deck))
