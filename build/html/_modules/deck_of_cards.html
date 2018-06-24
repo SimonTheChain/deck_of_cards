@@ -1,0 +1,413 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>deck_of_cards &#8212; deck_of_cards 0.0.5 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for deck_of_cards</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="c1"># Deck of cards</span>
+<span class="c1">#</span>
+<span class="c1"># Author: Simon Lachaîne</span>
+
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">shuffle</span><span class="p">,</span> <span class="n">choice</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+
+<span class="c1"># from highest to lowest: WARNING, INFO, DEBUG, NOTSET</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">DeckError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="Card"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.Card">[docs]</a><span class="k">class</span> <span class="nc">Card</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suit_rank_tup</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the card object</span>
+<span class="sd">        :param suit_rank_tup: a tuple of integers representing suit and rank</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">suit</span> <span class="o">=</span> <span class="n">suit_rank_tup</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="n">suit_rank_tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translate_card</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;_Card initialized_&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overrides equality comparison to allow sorting of objects</span>
+<span class="sd">        :param other: other Card instance to compare</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">rank</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">suit</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">suit</span>
+
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overrides lower than to allow sorting of objects</span>
+<span class="sd">        :param other: other Card instance to compare</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overrides greater than to allow sorting of objects</span>
+<span class="sd">        :param other: other Card instance to compare</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_assign_names</span><span class="p">(</span><span class="n">rank</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigns card names according to rank</span>
+<span class="sd">        :param rank: rank of the card</span>
+<span class="sd">        :return: string of the card&#39;s name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Ace&quot;</span>
+
+            <span class="k">elif</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Jack&quot;</span>
+
+            <span class="k">elif</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Queen&quot;</span>
+
+            <span class="k">elif</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">13</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;King&quot;</span>
+
+            <span class="k">elif</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">14</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Black and white&quot;</span>
+
+            <span class="k">elif</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">15</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Color&quot;</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;An invalid parameter was passed to &#39;_assign_names&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The argument for the method must be an integer&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_translate_card</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a human-readable name for the card</span>
+<span class="sd">        :return: full name of the card</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">suit</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">suit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> of spades&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_assign_names</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">))</span>
+
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">suit</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> of hearts&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_assign_names</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">))</span>
+
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">suit</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> of diamonds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_assign_names</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">))</span>
+
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">suit</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> of clubs&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_assign_names</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">))</span>
+
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">suit</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> joker&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_assign_names</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">))</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;The instance attribute suit is not between 0 and 4 inclusively&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The integer passed to the method must be 0, 1, 2, 3 or 4&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;An invalid parameter was passed to &#39;_translate_card&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The argument for the method must be an integer&quot;</span><span class="p">)</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="DeckOfCards"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards">[docs]</a><span class="k">class</span> <span class="nc">DeckOfCards</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="n">SUITS_RANKS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span>
+            <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">,</span>  <span class="c1"># suit</span>
+            <span class="mi">13</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">13</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">13</span>  <span class="c1"># rank</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">53</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the deck object with a single deck of cards</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Card</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUITS_RANKS</span>
+        <span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;_Deck initialized_&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_deck_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the deck is empty</span>
+<span class="sd">        :return: True if empty, False if not</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="DeckOfCards.add_deck"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards.add_deck">[docs]</a>    <span class="k">def</span> <span class="nf">add_deck</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds another deck of cards to the existing deck</span>
+<span class="sd">        :return: deck attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">deck</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Card</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUITS_RANKS</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span> <span class="o">+=</span> <span class="n">deck</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Deck of cards added&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck</span></div>
+
+<div class="viewcode-block" id="DeckOfCards.order_deck"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards.order_deck">[docs]</a>    <span class="k">def</span> <span class="nf">order_deck</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Orders the cards in the deck by value and rank</span>
+<span class="sd">        :return: deck object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">attrgetter</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;suit&quot;</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;_Deck sorted_</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">card</span><span class="o">.</span><span class="n">name</span>
+                <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck</span>
+            <span class="p">]</span>
+        <span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck</span></div>
+
+<div class="viewcode-block" id="DeckOfCards.shuffle_deck"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards.shuffle_deck">[docs]</a>    <span class="k">def</span> <span class="nf">shuffle_deck</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shuffles the cards in the deck</span>
+<span class="sd">        :return: deck object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;_Deck shuffled_</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">card</span><span class="o">.</span><span class="n">name</span>
+                <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck</span>
+            <span class="p">]</span>
+        <span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck</span></div>
+
+<div class="viewcode-block" id="DeckOfCards.print_deck"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards.print_deck">[docs]</a>    <span class="k">def</span> <span class="nf">print_deck</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prints the name of the cards in the deck</span>
+<span class="sd">        :return: print statement</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">[</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck</span>
+        <span class="p">]</span></div>
+
+<div class="viewcode-block" id="DeckOfCards.reset_deck"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards.reset_deck">[docs]</a>    <span class="k">def</span> <span class="nf">reset_deck</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resets the deck object</span>
+<span class="sd">        :return: deck object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;_Object reinitialized_&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck</span></div>
+
+    <span class="k">def</span> <span class="nf">_give_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_name</span><span class="p">,</span> <span class="n">operation</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Template for the methods that give a card from the deck</span>
+<span class="sd">        :return: card object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deck_empty</span><span class="p">():</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;&#39;</span><span class="si">{method_name}</span><span class="s2">&#39; called while the deck is empty</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">method_name</span><span class="o">=</span><span class="n">method_name</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">raise</span> <span class="n">DeckError</span><span class="p">(</span><span class="s2">&quot;Cannot retrieve a card from an empty deck&quot;</span><span class="p">)</span>
+
+        <span class="n">card</span> <span class="o">=</span> <span class="n">operation</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;_Card given_</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">card</span>
+
+<div class="viewcode-block" id="DeckOfCards.give_random_card"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards.give_random_card">[docs]</a>    <span class="k">def</span> <span class="nf">give_random_card</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gives a random card from the deck</span>
+<span class="sd">        :return: card object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_give_card</span><span class="p">(</span>
+            <span class="n">method_name</span><span class="o">=</span><span class="s2">&quot;give_random_card&quot;</span><span class="p">,</span>
+            <span class="n">operation</span><span class="o">=</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">card</span></div>
+
+<div class="viewcode-block" id="DeckOfCards.give_first_card"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards.give_first_card">[docs]</a>    <span class="k">def</span> <span class="nf">give_first_card</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gives the first card in the deck</span>
+<span class="sd">        :return: card object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_give_card</span><span class="p">(</span>
+            <span class="n">method_name</span><span class="o">=</span><span class="s2">&quot;give_first_card&quot;</span><span class="p">,</span>
+            <span class="n">operation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">card</span></div>
+
+<div class="viewcode-block" id="DeckOfCards.give_last_card"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards.give_last_card">[docs]</a>    <span class="k">def</span> <span class="nf">give_last_card</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gives the last card in the deck</span>
+<span class="sd">        :return: card object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_give_card</span><span class="p">(</span>
+            <span class="n">method_name</span><span class="o">=</span><span class="s2">&quot;give_last_card&quot;</span><span class="p">,</span>
+            <span class="n">operation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">card</span></div>
+
+<div class="viewcode-block" id="DeckOfCards.take_card"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards.take_card">[docs]</a>    <span class="k">def</span> <span class="nf">take_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">card</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a card to the deck</span>
+<span class="sd">        :param card: card object</span>
+<span class="sd">        :return: deck object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">card</span><span class="p">,</span> <span class="n">Card</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;_Card taken_</span><span class="se">\n</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;An invalid parameter was passed to &#39;take_card&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">DeckError</span><span class="p">(</span><span class="s2">&quot;The parameter for the take_card method must be a Card object&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DeckOfCards.add_jokers"><a class="viewcode-back" href="../classes_methods.html#deck_of_cards.DeckOfCards.add_jokers">[docs]</a>    <span class="k">def</span> <span class="nf">add_jokers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds jokers to the deck</span>
+<span class="sd">        :return: deck objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">joker_bw</span> <span class="o">=</span> <span class="n">Card</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">14</span><span class="p">))</span>
+        <span class="n">joker_color</span> <span class="o">=</span> <span class="n">Card</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">joker_bw</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">joker_color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">deck</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Example usage</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># create an instance of DeckOfCards</span>
+    <span class="n">deck_obj</span> <span class="o">=</span> <span class="n">DeckOfCards</span><span class="p">()</span>
+
+    <span class="c1"># add jokers</span>
+    <span class="n">deck_obj</span><span class="o">.</span><span class="n">add_jokers</span><span class="p">()</span>
+
+    <span class="c1"># sort the deck by value</span>
+    <span class="n">deck_obj</span><span class="o">.</span><span class="n">order_deck</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Deck sorted</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">deck_obj</span><span class="o">.</span><span class="n">print_deck</span><span class="p">()</span>
+
+    <span class="c1"># give out a random card</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Taking a random card&quot;</span><span class="p">)</span>
+    <span class="n">card</span> <span class="o">=</span> <span class="n">deck_obj</span><span class="o">.</span><span class="n">give_random_card</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="c1"># shuffle the deck</span>
+    <span class="n">deck_obj</span><span class="o">.</span><span class="n">shuffle_deck</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Deck shuffled</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">deck_obj</span><span class="o">.</span><span class="n">print_deck</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Length of deck</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># add a second deck of cards to the first one</span>
+    <span class="n">deck_obj</span><span class="o">.</span><span class="n">add_deck</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deck_obj</span><span class="o">.</span><span class="n">deck</span><span class="p">))</span>
+
+    <span class="c1"># insert a new card into the deck</span>
+    <span class="n">card</span> <span class="o">=</span> <span class="n">Card</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">deck_obj</span><span class="o">.</span><span class="n">take_card</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deck_obj</span><span class="o">.</span><span class="n">deck</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Simon Lachaine.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

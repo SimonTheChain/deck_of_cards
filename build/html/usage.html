@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Example usage &#8212; deck_of_cards 0.0.5 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Classes and Methods" href="classes_methods.html" />
+    <link rel="prev" title="Welcome to deck_of_cards’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="example-usage">
+<h1>Example usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="import-the-module">
+<h2>import the module<a class="headerlink" href="#import-the-module" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="kn">from</span> <span class="nn">deck_of_cards</span> <span class="kn">import</span> <span class="n">deck_of_cards</span>
+</span></pre></div>
+</div>
+</div>
+<div class="section" id="create-an-instance-of-deckofcards">
+<h2>create an instance of DeckOfCards<a class="headerlink" href="#create-an-instance-of-deckofcards" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="n">deck_obj</span> <span class="o">=</span> <span class="n">deck_of_cards</span><span class="o">.</span><span class="n">DeckOfCards</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<div class="section" id="add-jokers">
+<h2>add jokers<a class="headerlink" href="#add-jokers" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="n">deck_obj</span><span class="o">.</span><span class="n">add_jokers</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<div class="section" id="sort-the-deck-by-card-value">
+<h2>sort the deck by card value<a class="headerlink" href="#sort-the-deck-by-card-value" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="n">deck_obj</span><span class="o">.</span><span class="n">order_deck</span><span class="p">()</span>
+</span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Deck sorted</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">deck_obj</span><span class="o">.</span><span class="n">print_deck</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="give-out-a-random-card">
+<h2>give out a random card<a class="headerlink" href="#give-out-a-random-card" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="n">card</span> <span class="o">=</span> <span class="n">deck_obj</span><span class="o">.</span><span class="n">give_random_card</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<div class="section" id="card-objects-have-the-following-attributes">
+<h2>card objects have the following attributes<a class="headerlink" href="#card-objects-have-the-following-attributes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="n">card</span><span class="o">.</span><span class="n">suit</span>  <span class="c1"># 0=spades, 1=hearts, 2=diamonds, 3=clubs, 4=joker</span>
+</span><span class="hll"><span class="n">card</span><span class="o">.</span><span class="n">rank</span>  <span class="c1"># 1=Ace, 11=Jack, 12=Queen, 13=King, 14=B&amp;W Joker, 15=Color Joker</span>
+</span><span class="hll"><span class="n">card</span><span class="o">.</span><span class="n">value</span> <span class="c1"># defaults: same as rank</span>
+</span><span class="hll"><span class="n">card</span><span class="o">.</span><span class="n">name</span>  <span class="c1"># string representation</span>
+</span><span class="hll"><span class="n">card</span><span class="o">.</span><span class="n">image_path</span>  <span class="c1"># path to an image file corresponding to the card</span>
+</span></pre></div>
+</div>
+</div>
+<div class="section" id="insert-a-new-card-into-the-deck">
+<h2>insert a new card into the deck<a class="headerlink" href="#insert-a-new-card-into-the-deck" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deck_obj</span><span class="o">.</span><span class="n">deck</span><span class="p">))</span>
+<span class="hll"><span class="n">card</span> <span class="o">=</span> <span class="n">deck_of_cards</span><span class="o">.</span><span class="n">Card</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+</span><span class="k">print</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="hll"><span class="n">deck_obj</span><span class="o">.</span><span class="n">take_card</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deck_obj</span><span class="o">.</span><span class="n">deck</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="shuffle-the-deck">
+<h2>shuffle the deck<a class="headerlink" href="#shuffle-the-deck" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="n">deck_obj</span><span class="o">.</span><span class="n">shuffle_deck</span><span class="p">()</span>
+</span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Deck shuffled</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">deck_obj</span><span class="o">.</span><span class="n">print_deck</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-a-second-deck-of-cards-to-the-first-one">
+<h2>add a second deck of cards to the first one<a class="headerlink" href="#add-a-second-deck-of-cards-to-the-first-one" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deck_obj</span><span class="o">.</span><span class="n">deck</span><span class="p">))</span>
+<span class="hll"><span class="n">deck_obj</span><span class="o">.</span><span class="n">add_deck</span><span class="p">()</span>
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deck_obj</span><span class="o">.</span><span class="n">deck</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Example usage</a><ul>
+<li><a class="reference internal" href="#import-the-module">import the module</a></li>
+<li><a class="reference internal" href="#create-an-instance-of-deckofcards">create an instance of DeckOfCards</a></li>
+<li><a class="reference internal" href="#add-jokers">add jokers</a></li>
+<li><a class="reference internal" href="#sort-the-deck-by-card-value">sort the deck by card value</a></li>
+<li><a class="reference internal" href="#give-out-a-random-card">give out a random card</a></li>
+<li><a class="reference internal" href="#card-objects-have-the-following-attributes">card objects have the following attributes</a></li>
+<li><a class="reference internal" href="#insert-a-new-card-into-the-deck">insert a new card into the deck</a></li>
+<li><a class="reference internal" href="#shuffle-the-deck">shuffle the deck</a></li>
+<li><a class="reference internal" href="#add-a-second-deck-of-cards-to-the-first-one">add a second deck of cards to the first one</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to deck_of_cards’s documentation!</a></li>
+      <li>Next: <a href="classes_methods.html" title="next chapter">Classes and Methods</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/usage.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Simon Lachaine.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/usage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

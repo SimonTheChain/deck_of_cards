@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Classes and Methods &#8212; deck_of_cards 0.0.5 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Project Description" href="project.html" />
+    <link rel="prev" title="Example usage" href="usage.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-deck_of_cards">
+<span id="classes-and-methods"></span><h1>Classes and Methods<a class="headerlink" href="#module-deck_of_cards" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="deck_of_cards.Card">
+<em class="property">class </em><code class="descclassname">deck_of_cards.</code><code class="descname">Card</code><span class="sig-paren">(</span><em>suit_rank_tup</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#Card"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.Card" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="deck_of_cards.DeckOfCards">
+<em class="property">class </em><code class="descclassname">deck_of_cards.</code><code class="descname">DeckOfCards</code><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="deck_of_cards.DeckOfCards.add_deck">
+<code class="descname">add_deck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.add_deck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.add_deck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds another deck of cards to the existing deck
+:return: deck attribute</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="deck_of_cards.DeckOfCards.add_jokers">
+<code class="descname">add_jokers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.add_jokers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.add_jokers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds jokers to the deck
+:return: deck objects</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="deck_of_cards.DeckOfCards.give_first_card">
+<code class="descname">give_first_card</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.give_first_card"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.give_first_card" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives the first card in the deck
+:return: card object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="deck_of_cards.DeckOfCards.give_last_card">
+<code class="descname">give_last_card</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.give_last_card"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.give_last_card" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives the last card in the deck
+:return: card object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="deck_of_cards.DeckOfCards.give_random_card">
+<code class="descname">give_random_card</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.give_random_card"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.give_random_card" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a random card from the deck
+:return: card object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="deck_of_cards.DeckOfCards.order_deck">
+<code class="descname">order_deck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.order_deck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.order_deck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Orders the cards in the deck by value and rank
+:return: deck object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="deck_of_cards.DeckOfCards.print_deck">
+<code class="descname">print_deck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.print_deck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.print_deck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the name of the cards in the deck
+:return: print statement</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="deck_of_cards.DeckOfCards.reset_deck">
+<code class="descname">reset_deck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.reset_deck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.reset_deck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the deck object
+:return: deck object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="deck_of_cards.DeckOfCards.shuffle_deck">
+<code class="descname">shuffle_deck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.shuffle_deck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.shuffle_deck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shuffles the cards in the deck
+:return: deck object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="deck_of_cards.DeckOfCards.take_card">
+<code class="descname">take_card</code><span class="sig-paren">(</span><em>card</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.take_card"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.take_card" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a card to the deck
+:param card: card object
+:return: deck object</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="usage.html" title="previous chapter">Example usage</a></li>
+      <li>Next: <a href="project.html" title="next chapter">Project Description</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/classes_methods.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Simon Lachaine.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/classes_methods.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
