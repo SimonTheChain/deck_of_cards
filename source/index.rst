@@ -8,6 +8,12 @@ Welcome to deck_of_cards's documentation!
 
 A module to create a deck of cards object
 
+Installation:
+
+.. code-block:: python
+
+    pip install deck-of-cards
+
 Requirements: 
 
 pytest is required to run the tests;

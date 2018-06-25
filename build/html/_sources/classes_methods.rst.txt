@@ -1,8 +1,10 @@
-Classes and Methods
-====================
+Classes: Attributes and Methods
+===============================
 
 class deck_of_cards.Card(suit_rank_tup)
------------------------------------------------
+---------------------------------------
+**Attributes**
+
 .. code-block:: python
 
     self.suit = suit_rank_tup[0]
@@ -12,74 +14,83 @@ class deck_of_cards.Card(suit_rank_tup)
     self.image_path = ""
 
 
-class deck_of_cards.DeckOfCards
----------------------------------------
+class deck_of_cards.DeckOfCards()
+---------------------------------
+**Attributes**
+
+.. code-block:: python
+
+    self.deck = [Card(tup) for tup in self.SUITS_RANKS]
+
+**Methods**
+
 .. code-block:: python
 
     add_deck()
+    :return: deck object
 
 Adds another deck of cards to the existing deck
-:return: deck attribute
 
 .. code-block:: python
 
     add_jokers()
+    :return: deck object
 
 Adds jokers to the deck
-:return: deck objects
 
 .. code-block:: python
 
     give_first_card()
+    :return: card object
 
 Gives the first card in the deck
-:return: card object
 
 .. code-block:: python
 
     give_last_card()
+    :return: card object
 
 Gives the last card in the deck
-:return: card object
 
 .. code-block:: python
 
     give_random_card()
+    :return: card object
 
 Gives a random card from the deck
-:return: card object
 
 .. code-block:: python
 
     order_deck()
+    :return: deck object
 
-Orders the cards in the deck by value and rank
-:return: deck object
+Sorts the cards in the deck by value and suit
 
 .. code-block:: python
 
     print_deck()
+    :return: print statement
 
 Prints the name of the cards in the deck
-:return: print statement
 
 .. code-block:: python
 
     reset_deck()
+    :return: deck object
 
 Resets the deck object
-:return: deck object
 
 .. code-block:: python
 
     shuffle_deck()
+    :return: deck object
 
 Shuffles the cards in the deck
-:return: deck object
 
 .. code-block:: python
 
     take_card(card)
+    :param card: card object
+    :return: deck object
 
-Adds a card to the deck :param card: card object
-:return: deck object
+Adds a card to the deck

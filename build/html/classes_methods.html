@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Classes and Methods &#8212; deck_of_cards 0.0.5 documentation</title>
+    <title>Classes: Attributes and Methods &#8212; deck_of_cards 0.0.9 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -33,10 +33,11 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="classes-and-methods">
-<h1>Classes and Methods<a class="headerlink" href="#classes-and-methods" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="classes-attributes-and-methods">
+<h1>Classes: Attributes and Methods<a class="headerlink" href="#classes-attributes-and-methods" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="class-deck-of-cards-card-suit-rank-tup">
 <h2>class deck_of_cards.Card(suit_rank_tup)<a class="headerlink" href="#class-deck-of-cards-card-suit-rank-tup" title="Permalink to this headline">¶</a></h2>
+<p><strong>Attributes</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">suit</span> <span class="o">=</span> <span class="n">suit_rank_tup</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="n">suit_rank_tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span>
@@ -46,57 +47,63 @@
 </div>
 </div>
 <div class="section" id="class-deck-of-cards-deckofcards">
-<h2>class deck_of_cards.DeckOfCards<a class="headerlink" href="#class-deck-of-cards-deckofcards" title="Permalink to this headline">¶</a></h2>
+<h2>class deck_of_cards.DeckOfCards()<a class="headerlink" href="#class-deck-of-cards-deckofcards" title="Permalink to this headline">¶</a></h2>
+<p><strong>Attributes</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">deck</span> <span class="o">=</span> <span class="p">[</span><span class="n">Card</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span> <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUITS_RANKS</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Methods</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">add_deck</span><span class="p">()</span>
+<span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">deck</span> <span class="nb">object</span>
 </pre></div>
 </div>
-<p>Adds another deck of cards to the existing deck
-:return: deck attribute</p>
+<p>Adds another deck of cards to the existing deck</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">add_jokers</span><span class="p">()</span>
+<span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">deck</span> <span class="nb">object</span>
 </pre></div>
 </div>
-<p>Adds jokers to the deck
-:return: deck objects</p>
+<p>Adds jokers to the deck</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">give_first_card</span><span class="p">()</span>
+<span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">card</span> <span class="nb">object</span>
 </pre></div>
 </div>
-<p>Gives the first card in the deck
-:return: card object</p>
+<p>Gives the first card in the deck</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">give_last_card</span><span class="p">()</span>
+<span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">card</span> <span class="nb">object</span>
 </pre></div>
 </div>
-<p>Gives the last card in the deck
-:return: card object</p>
+<p>Gives the last card in the deck</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">give_random_card</span><span class="p">()</span>
+<span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">card</span> <span class="nb">object</span>
 </pre></div>
 </div>
-<p>Gives a random card from the deck
-:return: card object</p>
+<p>Gives a random card from the deck</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">order_deck</span><span class="p">()</span>
+<span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">deck</span> <span class="nb">object</span>
 </pre></div>
 </div>
-<p>Orders the cards in the deck by value and rank
-:return: deck object</p>
+<p>Sorts the cards in the deck by value and suit</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_deck</span><span class="p">()</span>
+<span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="k">print</span> <span class="n">statement</span>
 </pre></div>
 </div>
-<p>Prints the name of the cards in the deck
-:return: print statement</p>
+<p>Prints the name of the cards in the deck</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reset_deck</span><span class="p">()</span>
+<span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">deck</span> <span class="nb">object</span>
 </pre></div>
 </div>
-<p>Resets the deck object
-:return: deck object</p>
+<p>Resets the deck object</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">shuffle_deck</span><span class="p">()</span>
+<span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">deck</span> <span class="nb">object</span>
 </pre></div>
 </div>
-<p>Shuffles the cards in the deck
-:return: deck object</p>
+<p>Shuffles the cards in the deck</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">take_card</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<span class="p">:</span><span class="n">param</span> <span class="n">card</span><span class="p">:</span> <span class="n">card</span> <span class="nb">object</span>
+<span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="n">deck</span> <span class="nb">object</span>
 </pre></div>
 </div>
-<p>Adds a card to the deck :param card: card object
-:return: deck object</p>
+<p>Adds a card to the deck</p>
 </div>
 </div>
 
@@ -109,9 +116,9 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Classes and Methods</a><ul>
+<li><a class="reference internal" href="#">Classes: Attributes and Methods</a><ul>
 <li><a class="reference internal" href="#class-deck-of-cards-card-suit-rank-tup">class deck_of_cards.Card(suit_rank_tup)</a></li>
-<li><a class="reference internal" href="#class-deck-of-cards-deckofcards">class deck_of_cards.DeckOfCards</a></li>
+<li><a class="reference internal" href="#class-deck-of-cards-deckofcards">class deck_of_cards.DeckOfCards()</a></li>
 </ul>
 </li>
 </ul>
