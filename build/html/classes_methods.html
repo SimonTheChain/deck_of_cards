@@ -33,89 +33,71 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-deck_of_cards">
-<span id="classes-and-methods"></span><h1>Classes and Methods<a class="headerlink" href="#module-deck_of_cards" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="deck_of_cards.Card">
-<em class="property">class </em><code class="descclassname">deck_of_cards.</code><code class="descname">Card</code><span class="sig-paren">(</span><em>suit_rank_tup</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#Card"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.Card" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="deck_of_cards.DeckOfCards">
-<em class="property">class </em><code class="descclassname">deck_of_cards.</code><code class="descname">DeckOfCards</code><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="deck_of_cards.DeckOfCards.add_deck">
-<code class="descname">add_deck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.add_deck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.add_deck" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds another deck of cards to the existing deck
+  <div class="section" id="classes-and-methods">
+<h1>Classes and Methods<a class="headerlink" href="#classes-and-methods" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-deck-of-cards-card-suit-rank-tup">
+<h2>class deck_of_cards.Card(suit_rank_tup)<a class="headerlink" href="#class-deck-of-cards-card-suit-rank-tup" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">suit</span> <span class="o">=</span> <span class="n">suit_rank_tup</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="n">suit_rank_tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translate_card</span><span class="p">()</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">image_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="class-deck-of-cards-deckofcards">
+<h2>class deck_of_cards.DeckOfCards<a class="headerlink" href="#class-deck-of-cards-deckofcards" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">add_deck</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Adds another deck of cards to the existing deck
 :return: deck attribute</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="deck_of_cards.DeckOfCards.add_jokers">
-<code class="descname">add_jokers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.add_jokers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.add_jokers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds jokers to the deck
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">add_jokers</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Adds jokers to the deck
 :return: deck objects</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="deck_of_cards.DeckOfCards.give_first_card">
-<code class="descname">give_first_card</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.give_first_card"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.give_first_card" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gives the first card in the deck
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">give_first_card</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Gives the first card in the deck
 :return: card object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="deck_of_cards.DeckOfCards.give_last_card">
-<code class="descname">give_last_card</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.give_last_card"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.give_last_card" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gives the last card in the deck
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">give_last_card</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Gives the last card in the deck
 :return: card object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="deck_of_cards.DeckOfCards.give_random_card">
-<code class="descname">give_random_card</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.give_random_card"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.give_random_card" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gives a random card from the deck
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">give_random_card</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Gives a random card from the deck
 :return: card object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="deck_of_cards.DeckOfCards.order_deck">
-<code class="descname">order_deck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.order_deck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.order_deck" title="Permalink to this definition">¶</a></dt>
-<dd><p>Orders the cards in the deck by value and rank
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">order_deck</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Orders the cards in the deck by value and rank
 :return: deck object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="deck_of_cards.DeckOfCards.print_deck">
-<code class="descname">print_deck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.print_deck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.print_deck" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints the name of the cards in the deck
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">print_deck</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Prints the name of the cards in the deck
 :return: print statement</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="deck_of_cards.DeckOfCards.reset_deck">
-<code class="descname">reset_deck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.reset_deck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.reset_deck" title="Permalink to this definition">¶</a></dt>
-<dd><p>Resets the deck object
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reset_deck</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Resets the deck object
 :return: deck object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="deck_of_cards.DeckOfCards.shuffle_deck">
-<code class="descname">shuffle_deck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.shuffle_deck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.shuffle_deck" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shuffles the cards in the deck
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">shuffle_deck</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Shuffles the cards in the deck
 :return: deck object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="deck_of_cards.DeckOfCards.take_card">
-<code class="descname">take_card</code><span class="sig-paren">(</span><em>card</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/deck_of_cards.html#DeckOfCards.take_card"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#deck_of_cards.DeckOfCards.take_card" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a card to the deck
-:param card: card object
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">take_card</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Adds a card to the deck :param card: card object
 :return: deck object</p>
-</dd></dl>
-
-</dd></dl>
-
+</div>
 </div>
 
 
@@ -124,7 +106,16 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Classes and Methods</a><ul>
+<li><a class="reference internal" href="#class-deck-of-cards-card-suit-rank-tup">class deck_of_cards.Card(suit_rank_tup)</a></li>
+<li><a class="reference internal" href="#class-deck-of-cards-deckofcards">class deck_of_cards.DeckOfCards</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>

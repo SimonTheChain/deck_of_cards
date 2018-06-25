@@ -20,6 +20,7 @@ pytest-cov is recommended instead.
    usage
    classes_methods
    project
+   autodoc
 
 
 
