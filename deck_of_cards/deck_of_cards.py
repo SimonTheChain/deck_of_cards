@@ -30,6 +30,7 @@ class Card(object):
         self.value = self.rank
         self.name = self._translate_card()
         self.image_path = ""
+        self.image_obj = None
 
         logging.debug("_Card initialized_")
 
@@ -242,6 +243,10 @@ class DeckOfCards(object):
             method_name="give_random_card",
             operation=choice(self.deck)
         )
+
+        for card_obj in self.deck:
+            if card_obj.name == card.name:
+                self.deck.remove(card_obj)
         return card
 
     def give_first_card(self):
