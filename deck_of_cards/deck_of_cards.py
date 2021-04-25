@@ -146,6 +146,17 @@ class DeckOfCards(object):
         ]
         logging.debug("_Deck initialized_")
 
+    def __getitem__(self, index):
+        """
+        Allows bracket notation to be used to index into self.cards
+        :return: Card
+        """
+        return self.deck[index]
+
+    def __iter__(self):
+        yield from self.deck
+
+
     def _deck_empty(self):
         """
         Checks if the deck is empty
@@ -168,7 +179,7 @@ class DeckOfCards(object):
         ]
         self.deck += deck
         logging.debug("Deck of cards added")
-        return self.deck
+        return self
 
     def order_deck(self):
         """
@@ -182,7 +193,7 @@ class DeckOfCards(object):
                 for card in self.deck
             ]
         ))
-        return self.deck
+        return self
 
     def shuffle_deck(self):
         """
@@ -196,7 +207,7 @@ class DeckOfCards(object):
                 for card in self.deck
             ]
         ))
-        return self.deck
+        return self
 
     def print_deck(self):
         """
@@ -215,7 +226,7 @@ class DeckOfCards(object):
         """
         self.__init__()
         logging.debug("_Object reinitialized_")
-        return self.deck
+        return self
 
     def _give_card(self, method_name, operation):
         """
@@ -294,7 +305,7 @@ class DeckOfCards(object):
         joker_color = Card((4, 15))
         self.deck.append(joker_bw)
         self.deck.append(joker_color)
-        return self.deck
+        return self
 
 
 def main():
@@ -332,6 +343,20 @@ def main():
     card = Card((2, 4))
     deck_obj.take_card(card)
     print(len(deck_obj.deck))
+
+    # deck is indexable:
+    print("Deck is indexable:")
+    print("First card is: " + deck_obj[0].name)
+    # deck is iterable:
+    print("Deck is iterable and each item is a card:")
+    for c in deck_obj:
+        if (c.rank == 1):
+            print(c.name)
+
+    print("You can also do functional operations on the deck object:")
+    aces = filter(lambda c: c.rank == 1, deck_obj)
+    print([a.name for a in aces])
+
 
 
 if __name__ == "__main__":

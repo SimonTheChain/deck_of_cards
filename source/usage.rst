@@ -77,3 +77,11 @@ add a second deck of cards to the first one
     print(len(deck_obj.deck))
     deck_obj.add_deck()
     print(len(deck_obj.deck))
+
+index and iterate over a deck object
+------------------------------------
+.. code-block:: python
+    :emphasize-lines: 2
+
+    first_card = deck_obj[0]
+    card_names = [card.name for card in deck_obj]
