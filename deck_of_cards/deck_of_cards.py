@@ -154,8 +154,10 @@ class DeckOfCards(object):
         return self.deck[index]
 
     def __iter__(self):
+        """
+        Allows deck to be iterable
+        """
         yield from self.deck
-
 
     def _deck_empty(self):
         """
@@ -356,8 +358,6 @@ def main():
     print("You can also do functional operations on the deck object:")
     aces = filter(lambda c: c.rank == 1, deck_obj)
     print([a.name for a in aces])
-
-
 
 if __name__ == "__main__":
     main()
