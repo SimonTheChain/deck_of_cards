@@ -56,6 +56,12 @@ deck_obj.add_deck()
 print(len(deck_obj.deck))
 ```
 
+**index and iterate over a deck object**
+```
+first_card = deck_obj[0]
+card_names = [card.name for card in deck_obj]
+```
+
 ### Test coverage
 ```
 ============================= test session starts =============================

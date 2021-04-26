@@ -17,7 +17,7 @@ import copy
 
 import pytest
 
-from deck_of_cards.deck_of_cards import Card, DeckOfCards
+from deck_of_cards import Card, DeckOfCards
 
 
 class TestCard:
