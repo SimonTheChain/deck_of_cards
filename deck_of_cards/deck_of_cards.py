@@ -40,7 +40,9 @@ class Card(object):
         :param other: other Card instance to compare
         :return:
         """
-        return self.rank == other.rank and self.suit == other.suit
+        if isinstance(other, Card):
+            return self.rank == other.rank and self.suit == other.suit
+        return False
 
     def __lt__(self, other):
         """
